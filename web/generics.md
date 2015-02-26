@@ -77,8 +77,30 @@ POST /compras serviría para crear una nueva compra. El body podría ser:
 que el cliente le envía al servidor dentro de esta petición (json, html). 
 
 ### HTTP Response 
+Una HTTP response es lo que responde el servidor cuando recibe y procesa una HTTP request.
+El servidor, mediante la HTTP response, indica el resultado de la request:
+* Si ha habido un error al procesarla.
+* Si se ha procesado bien.
+* También puede incluir un body, es decir, una respuesta hacia el cliente.
 
-
+Una response contiene:
+* Status_code: 100...599 que indica el resultado de la petición.
+Los más importantes son:
+  * 200: significa que la petición ha sido procesada correctamente.
+  * 201: significa que la petición ha sido procesada correctamente y una entidad ha sido creada.
+Por ejemplo, una compra.
+  * 400: es un error, bad request. Significa que el body de la request es incorrecto porque faltan
+campos que son obligatorios o hay campos con nombres no reconocidos por el servidor o el formato
+del valor de un campo es incorrecto. Por ejemplo, debería ser un int y es un string. 
+  * 404: not found. La URL a la cual he enviado la request no existe. Por ejemplo /compras/messi
+ no existe.
+  * 405: method not allowed. El method especificado en HTTP request no está permitido para la URL
+especificada. 
+  * 500: Internal server error. El servidor ha sufrido una excepción al procesar la petición. 
+  * 503: Service unavailable. El servidor web está down. 
+* Cabeceras: Como por ejemplo Set-Cookie, Content-Type, etc.
+* Body: Contiene la respuesta. Por ejemplo, si haces una request GET /compras, el body de la 
+response contiene esa lista de compras.
 
 ### API
 Significa Abstract Public Interface. Es una interfaz pública definida por un componente. Ese
@@ -96,8 +118,27 @@ La API de una clase java es la lista de funciones públicas de esa clase.
 Un servidor web es responsable de definir y publicar su API. Un cliente es responsable de conocer y entender
 la API del servidor con el cual quiere hablar. 
 
+### Cookies
+Una cookie es un valor(sessionid=12345) el cual el servidor, envía al cliente en la cabecera 
+Set-Cookie de una HTTP Response. El navegador se guarda esta cookie al recibirla. El navegador está
+obligado a enviar esa cookie en las siguientes HTTP requests que le envía a este servidor. 
+El navegador envía la cookie en una cabecera de la HTTP request.
 
+### Web Server
+Un servidor web es un ordenador el cual está escuchando peticiones HTTP en un puerto determinado,
+usualmente el 80. 
 
+### Server-side technologies
+Cuando un programador quiere programar un web server, tiene que escoger una server side technology.
+¿Que tecnología/framework/lenguaje quiero usar para programar mi web server? Puedo usar java servlets, 
+PHP, ruby on rails, nodeJS, Python, django. Cada tecnología tiene sus ventajas y sus desventajas. 
+Programar un web server consiste en definir los endpoints de mi web server. Por ejemplo:
+* Una petición a POST /compras requiere los campos obligatorios producto, precio, etc. en formato json.
+  * Si algún campo obligatorio no es parte de la petición, devolveré un error 400. 
+  * Si el body de la request no está en json, y json es el único formato que yo acepto, devolveré
+un error 406. 
+  * Si el body de la request es válido, crearé una nueva compra, la guardaré en mi base de datos y 
+devolveré en la response el identificador de la compra que acabo de crear.
 
 
 
