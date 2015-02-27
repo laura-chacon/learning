@@ -203,7 +203,6 @@ click en el botón de Enviar tweet, hay un código JS que captura ese click y en
 request POST al servidor de twitter para publicar este nuevo tweet.
 Este segundo tipo de peticiones son peticiones AJAX.
 
-#### HTML5
 
 
 
