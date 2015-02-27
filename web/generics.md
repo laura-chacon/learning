@@ -176,6 +176,7 @@ y JavaScript.
 </html>
 ```
 Estos son los pasos:
+
 1. Usuario escribe mywebsite.com en la caja de texto del navegador y pulsa enter.
 2. El navegador envia una peticion GET mywebsite.com
 3. El servidor web recibe esta peticion.
