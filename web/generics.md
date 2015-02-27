@@ -1,8 +1,3 @@
-### HTML
-HTML es un lenguaje de etiquetas. Un navegador sabe interpretar y renderizar HTML.
-Con HTML podemos definir párrafos, tablas, cabeceras, imagenes, links, etc.
-El navegador, por normal general, recibe HTML desde un servidor web. 
-
 ### Típica interacción web
 1. El usuario hace click en un link a mywebsite.com/index.html.
 2. Esto hace que el navegador envie una petición HTTP GET a mywebsite.com/index.html.
@@ -139,6 +134,100 @@ Programar un web server consiste en definir los endpoints de mi web server. Por 
 un error 406. 
   * Si el body de la request es válido, crearé una nueva compra, la guardaré en mi base de datos y 
 devolveré en la response el identificador de la compra que acabo de crear.
+
+### Browser-Side technologies
+
+#### HTML
+HTML es un lenguaje de etiquetas. Un navegador sabe interpretar y renderizar HTML.
+Con HTML podemos definir párrafos, tablas, cabeceras, imagenes, links, etc.
+
+Un servidor web puede retornar HTML dentro de una HTTP response. El navegador renderizará este HTML.
+
+#### CSS
+Otro tipo de ficheros que un servidor web retorna al navegador. Es un lenguaje que sirve para
+especificar el formato y aspecto visual de los elementos que forman un documento HTML.
+
+#### JavaScript
+Es otro tipo de ficheros que un servidor web retorna. JavaScript es una lenguaje de programación 
+que los navegadores saben interpretar y ejecutar. Es código que se ejecuta en el navegador y 
+no en el servidor web. Sirve para:
+* Validación de formularios en la parte del navegador.
+* Enviar peticiones HTTP a un servidor web para actualizar una parte de la página web.
+* En general, sirve para ofrecer una user experience más moderna y dinámica.
+
+#### AJAX
+Asynchronous JavaScript And XML. Es una técnica que permite a un código JavaScript que se está
+ejecutando en el navegador enviar peticiones HTTP a un servidor web.
+
+Un navegador envía peticiones HTTP en dos principales casos:
+* El más común es cuando el usuario escribe en la caja de texto del navegador una URL a la cual
+quiere acceder. Al pulsar Enter el navegador envía una petición GET a esa URL. El servidor web,
+normalmente, responde con un HTML el cual, dentro de su `head` tag hace referencia a ficheros CSS
+y JavaScript.
+```
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <script src="script.js" type="text/javascript"></script>
+  </head>
+  <body>
+
+  </body>
+</html>
+```
+Estos son los pasos:
+1. Usuario escribe mywebsite.com en la caja de texto del navegador y pulsa enter.
+2. El navegador envia una peticion GET mywebsite.com
+3. El servidor web recibe esta peticion.
+4. El servidor envia una HTTP response que contiene el fichero index.html (un fichero como el del
+ejemplo de arriba).
+5. El navegador lee el index.html y se da cuenta de que hace referencia a dos ficheros: mystyle.css y
+script.js.
+6. Automaticamente, el navegador envia una HTTP request GET mywebsite.com/mystyle.css.
+7. El servidor contesta con una HTTP response que contiene el fichero mystyle.css
+8. El navegador interpreta mystyle.css y se lo guarda para saber como mostrar cada uno de los elementos
+HTML.
+9. Ahora el navegador envia otra HTTP request GET mywebsite.com/script.js para obtener el fichero JS
+referenciado en index.html.
+10. El servidor contesta con una HTTP response que contiene el fichero script.js
+11. El navegador recibe esa response y se guarda el fichero script.js.
+
+Estas tres HTTP requests que el navegador ha hecho estaban pidiendo contenido estatico. Es decir,
+piden ficheros de texto (html, css, js) que el servidor web tiene guardados en disco. El servidor web
+no tiene nada mas que coger esos ficheros y devolverlos. Se le llama servir contenido estatico.
+
+* El otro tipo de peticiones HTTP más común son las peticiones dinámicas hechas por un JS script.
+Por ejemplo:
+  * cuando desde la página de Twitter, escribes un nuevo tweet en la caja de texto y haces
+click en el botón de Enviar tweet, hay un código JS que captura ese click y entonces envía una HTTP
+request POST al servidor de twitter para publicar este nuevo tweet.
+Este segundo tipo de peticiones son peticiones AJAX.
+
+#### HTML5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
